@@ -64,6 +64,12 @@
 -(NSString *)autoDescribe
 {
     Class classType = [self class];
+
+    // Don't try to autoDescribe NSManagedObject subclasses (Core Data does this already)
+    if ([self isKindOfClass:[NSManagedObject class]]) {
+        return [self description];
+    }
+
     return [self autoDescribe:classType];
 }
 
